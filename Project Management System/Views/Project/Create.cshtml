@@ -1,0 +1,76 @@
+@model Project
+@{
+    ViewData["Title"] = "Create Project";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class="container" style='padding:30px;'>
+    <h1 class="text-info">Create project</h1>
+    <div class="col-sm-12 text-danger">
+        @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <p class="text-success">@ViewBag.message</p>
+        }
+    </div>
+    <form asp-action="Create" asp-controller="Project" method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="registerdiv">
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.ProjectName" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.ProjectName">
+                    <span class='text-danger' asp-validation-for="@Model.ProjectName"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Description" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="textarea" class='form-control' asp-for="@Model.Description">
+                    <span class='text-danger' asp-validation-for="@Model.Description"></span>
+                </div>
+            </div>
+            <input type="hidden" asp-for="@Model.Status" value="Initiated">
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Priority" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <select asp-for="@Model.Priority" class="form-control form-control-lg">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                    <span class='text-danger' asp-validation-for="@Model.Priority"></span>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="@Model.CreatedDate" value='@DateTime.Now.ToString("yyyy-MM-dd")'>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.StartDate" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.StartDate">
+                    <span class='text-danger' asp-validation-for="@Model.StartDate"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.EndDate" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.EndDate">
+                    <span class='text-danger' asp-validation-for="@Model.EndDate"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12 btn-submit">
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

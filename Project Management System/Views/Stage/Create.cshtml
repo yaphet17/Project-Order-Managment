@@ -1,0 +1,41 @@
+@model ProjectStage
+@{
+    ViewData["Title"] = "Create Stage";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class="container" style='padding:30px;'>
+    <h1 class="text-info">Create stage</h1>
+    <form asp-action="Create" asp-controller="Stage" method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <h5 class="text-success">@ViewBag.message</h5>
+        }
+        <input type="hidden" asp-for="@Model.PId">
+        <div class="form-group col-sm-12 row">
+            <label asp-for="@Model.StageName" class="col-lg-3 control-label"></label>
+            <div class="col-lg-9">
+                <input class='form-control' asp-for="@Model.StageName">
+                <span class='text-danger' asp-validation-for="@Model.StageName"></span>
+            </div>
+        </div>
+        <div class="form-group col-sm-12 row">
+            <label asp-for="@Model.StageWeight" class="col-lg-3 control-label"></label>
+            <div class="col-lg-9">
+                <input class='form-control' asp-for="@Model.StageWeight">
+                <span class='text-danger' asp-validation-for="@Model.StageWeight"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 btn-submit">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="Detail" asp-controller="Project" asp-route-pid="@Model.PId"
+                    class="btn btn-primary text-white">Cancel</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

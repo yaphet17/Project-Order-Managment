@@ -1,0 +1,31 @@
+@model AddTaskAttachmentViewModel
+@{
+    ViewData["Title"] = "Add Attachment";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<div class='border container' style='padding:30px;'>
+    <form asp-action="AddAttachment" asp-controller="Task" method="POST" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.TId">
+        <div class="col-12 row">
+            <h1 class="text-info flex-grow-1">Add attachment</h1>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label class="font-weight-bold">Upload task attachment</label>
+            </div>
+            <div class='col-6'>
+                <input type="file" name="file" class="form-control">
+            </div>
+        </div>
+        <div class='form-group form-submit row'>
+            <div class='col-2.5 btn-submit'>
+                <button type="submit" class='btn btn-success'>Upload</button>
+            </div>
+            <div class='col-3'>
+                <a asp-action='Detail' asp-controller="Task" asp-route-id="@Model.TId" class='btn btn-success'>Skip</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,68 @@
+@model IEnumerable<ApplicationPrivilege>
+
+@{
+    ViewData["Title"] = "Privileges";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+    int i = 1;
+}
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2 class="text-info">Privileges</h2>
+    </div>
+    @if (TempData.ContainsKey("priMessage"))
+    {
+        <div class="col-sm-12">
+            <p class="text-success">@TempData["priMessage"]</p>
+        </div>
+    }
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>No</th>
+                        <th>
+                            <label>Description</label>
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @i
+                                @{
+                                    i++;
+                                }
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td>
+
+                                <form asp-action="Delete" asp-controller="Privilege" asp-route-id="@item.Id" method="POST">
+                                    <label class="text-danger">
+                                        <i class="fa fa-trash-o" style="font-size:24px"></i>
+                                        <button type="submit" class="no-btn"
+                                    onclick="return confirm('Are you sure you want to delete?')">
+                                        </button>
+                                    </label>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No privilege found.</p>
+            }
+        </form>
+    </div>
+</div>

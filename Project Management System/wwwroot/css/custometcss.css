@@ -1,0 +1,51 @@
+﻿
+/*begin Button Primary*/
+.btn-primary {
+    color: #fff;
+    background-color: #2e7c31 !important; /*#007bff;*/
+    border-color: #2e7c31 !important; /*#007bff;*/
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #60ac5d !important;
+        border-color: #004f04 !important;
+    }
+/*end of, Button Primary*/
+
+/*Icon Primary*/
+.text-primary {
+    color: #2e7c31 !important;
+}
+
+a.text-primary:hover, a.text-primary:focus {
+    color: #60ac5d !important;
+}
+
+/*Active nav-link primary*/
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #2e7c31 !important;
+}
+
+
+.bg-primary {
+    background-color: #2e7c31 !important;
+}
+
+
+.info-box-icon {
+    border-radius: 0.25rem;
+    display: block;
+    width: 112px !important;
+    text-align: center;
+    font-size: 50px !important;
+    height: 112px !important;
+}
+
+.bg-primary:hover, a.bg-primary:focus {
+    background-color: #60ac5d !important;
+    border-color: #004f04 !important;
+}

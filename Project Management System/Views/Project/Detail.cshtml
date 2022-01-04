@@ -1,0 +1,484 @@
+@model DetailViewModel
+@{
+    ViewData["Title"] = "Project Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+    int i = 1;
+    int j = 1;
+    int k = 1;
+    int m = 1;
+    int span;
+}
+<div class='container' style='padding:30px;'>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#detail">Detail</a></li>
+        <li><a data-toggle="tab" href="#product">Products</a></li>
+        <li><a data-toggle="tab" href="#stage">Stages</a></li>
+        <li><a data-toggle="tab" href="#task">Tasks</a></li>
+        <li><a data-toggle="tab" href="#team">Teams</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="detail" class="tab-pane fade in active">
+            <div class="col-12 row">
+                <h1 class="text-info flex-grow-1">Project detail</h1>
+                <div>
+                    <a asp-action="ChangeStatus" asp-controller="Project" asp-route-pid="@Model.PId"
+                        class="btn btn-info">Change Status</a>
+                    <a asp-action="Delay" asp-controller="Project" asp-route-pid="@Model.PId" class="btn btn-info">Delay
+                        Project</a>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class="col-sm-12">
+                    @if (TempData.ContainsKey("pMessage"))
+                    {
+                        <p class="text-success">@TempData["pMessage"]</p>
+                    }
+                    else if (TempData.ContainsKey("errorPMessage"))
+                    {
+                        <p class="text-danger">@TempData["errorPMessage"]</p>
+                    }
+                </div>
+                <div class='col-2'>
+                    <label asp-for="@Model.ProjectName" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.ProjectName</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.Description" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.Description</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.Status" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.Status</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.Priority" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.Priority</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.CreatedDate" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.CreatedDate</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.StartDate" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.StartDate</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.EndDate" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <h2 class='form-control'>@Model.EndDate</h2>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.ProjectManager" class="font-weight-bold"></label>
+                </div>
+                <div class='col-5'>
+                    <h2 class='form-control'>@Model.ProjectManager</h2>
+                </div>
+                @if (string.Equals(Model.ProjectManager, "Not assigned"))
+                {
+                    <div class="col-2">
+                        <a asp-action="AssignRole" asp-controller="project" asp-route-pid="@Model.PId"
+                        asp-route-rid="1">Assign</a>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="col-2">
+                        <form asp-action="RemoveRole" asp-controller="project" asp-route-pid="@Model.PId" asp-route-rid="1"
+                        method="POST">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete?')"
+                            class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+
+                    </div>
+                }
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.Executive" class="font-weight-bold"></label>
+                </div>
+                <div class='col-5'>
+                    <h2 class='form-control'>@Model.Executive</h2>
+
+                </div>
+                @if (string.Equals(Model.Executive, "Not assigned"))
+                {
+                    <div class="col-2">
+                        <a asp-action="AssignRole" asp-controller="project" asp-route-pid="@Model.PId"
+                        asp-route-rid="2">Assign</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-2">
+                        <form asp-action="RemoveRole" asp-controller="project" asp-route-pid="@Model.PId" asp-route-rid="2"
+                        method="POST">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete?')"
+                            class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </div>
+                }
+            </div>
+            <div class='form-group row'>
+                <div class='col-2.5'>
+                    <a asp-action="Edit" asp-controller="Project" asp-route-pid="@Model.PId"
+                        class='btn btn-success'>Edit
+                        project detail</a>
+                </div>
+                <div class='col-3'>
+                    <a asp-action="Index" asp-controller="Project" class='btn btn-success'>Back
+                        to
+                        List</a>
+                </div>
+            </div>
+        </div>
+        <div id="product" class="tab-pane fade in">
+            <div class="col-12 border p-3 mt-3">
+                <div class="col-12 row">
+                    <h1 class="text-info flex-grow-1">Project Products</h1>
+                    <div>
+                        <a asp-action="Create" asp-controller="Product" asp-route-pid="@Model.PId"
+                            class="btn btn-info">Create Product</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    @if (TempData.ContainsKey("pdMessage"))
+                    {
+                        <p class="text-success">@TempData["pdMessage"]</p>
+                    }
+                    else if (TempData.ContainsKey("errorPdMessage"))
+                    {
+                        <p class="text-danger">@TempData["errorPdMessage"]</p>
+                    }
+                </div>
+                @if (Model.ProjectProducts.Count() > 0)
+                {
+                    <table class="table border">
+                        <tr class="table-secondary">
+                            <th>No.</th>
+                            <th>
+                                <label>Product Name</label>
+                            </th>
+                            <th>
+                                <label>Action</label>
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.ProjectProducts)
+                        {
+                            <tr>
+                                <td>
+                                    @m
+                                    @{
+                                        m++;
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Detail" asp-controller="Product"
+                                asp-route-id="@item.Id">@item.ProductName</a>
+                                </td>
+                                <td>
+
+                                    <form asp-action="Delete" asp-controller="Product" asp-route-id="@item.Id" method="POST">
+                                        <a asp-action="Edit" asp-controller="Product" asp-route-id="@item.Id"><i
+                                        class="fa fa-edit" style="font-size:24px"></i></a>
+                                        <label class="text-danger"><i class="fa fa-trash-o" style="font-size:24px"></i><button
+                                        type="submit" class="no-btn"
+                                        onclick="return confirm('Are you sure you want to delete?')"></button></label>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                }
+                else
+                {
+                    <p>No product found.</p>
+                }
+            </div>
+        </div>
+        <div id="stage" class="tab-pane fade in">
+            <div class="col-12 border p-3 mt-3">
+                <div class="col-12 row">
+                    <h1 class="text-info flex-grow-1">Project Stages</h1>
+                    <div>
+                        <a asp-action="Create" asp-controller="Stage" asp-route-pid="@Model.PId"
+                            class="btn btn-info">Create
+                            Stage</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    @if (TempData.ContainsKey("tkMessage"))
+                    {
+                        <p class="text-success">@TempData["tkMessage"]</p>
+                    }
+                    else if (TempData.ContainsKey("errorTkMessage"))
+                    {
+                        <p class="text-danger">@TempData["errorTkMessage"]</p>
+                    }
+                </div>
+                @if (Model.StageTaskDict.Count() > 0)
+                {
+                    <table class="table border">
+                        <tr class="table-secondary">
+                            <th>No.</th>
+                            <th>
+                                <label>Stage</label>
+                            </th>
+                            <th>
+                                <label>Task Name</label>
+                            </th>
+                            <th>
+                                <label>Starting Date</label>
+                            </th>
+                            <th>
+                                <label>Due Date</label>
+                            </th>
+                            <th>
+                                <label>Weight</label>
+                            </th>
+                            <th>
+                                <label>Status</label>
+                            </th>
+                            <th>
+                                <label>Action</label>
+                            </th>
+                        </tr>
+                        @foreach (KeyValuePair<Dictionary<int, string>, List<ProjectTask>> kvp in Model.StageTaskDict)
+                        {
+
+                            <tr>
+                                @{
+                                    span = kvp.Value.Count() + 1;
+                                }
+                                <td rowspan="@span" align="center">
+                                    @i
+                                    @{
+                                        i++;
+                                    }
+                                </td>
+                                <td rowspan="@span">
+                                    @foreach (KeyValuePair<int, string> kv in kvp.Key)
+                                    {
+                                        <a asp-action="Detail" asp-controller="Task" asp-route-id="@kv.Key">@kv.Value</a>
+                                    }
+
+                                </td>
+                            </tr>
+                            @foreach (var item in kvp.Value)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="Task" asp-controller="Project" asp-route-id="@item.Id">@item.Name</a>
+                                    </td>
+                                    <td>
+                                        @item.StartDate
+                                    </td>
+                                    <td>
+                                        @item.EndDate
+                                    </td>
+                                    <td>
+                                        @item.Weight
+                                    </td>
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+
+                                        <form asp-action="Delete" asp-controller="Project" asp-route-id="@item.Id" method="POST">
+                                            <a asp-action="Edit" asp-controller="Project" asp-route-id="@item.Id"><i
+                                        class="fa fa-edit" style="font-size:24px"></i></a>
+
+                                            <label class="text-danger"><i class="fa fa-trash-o" style="font-size:24px"></i><button
+                                        type="submit" class="no-btn"
+                                        onclick="return confirm('Are you sure you want to delete?')"></button></label>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </table>
+                }
+                else
+                {
+                    <p>No stage found.</p>
+                }
+            </div>
+        </div>
+        <div id="task" class="tab-pane fade in">
+            <div class="col-12 border p-3 mt-3">
+                <div class="col-12 row">
+                    <h1 class="text-info flex-grow-1">Project Tasks</h1>
+                    <div>
+                        <a asp-action="Create" asp-controller="Task" asp-route-pid="@Model.PId"
+                            class="btn btn-info">Create
+                            Task</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    @if (TempData.ContainsKey("tkMessage"))
+                    {
+                        <p class="text-success">@TempData["tkMessage"]</p>
+                    }
+                    else if (TempData.ContainsKey("errorTkMessage"))
+                    {
+                        <p class="text-danger">@TempData["errorTkMessage"]</p>
+                    }
+                </div>
+                @if (Model.StageTaskDict.Count() > 0)
+                {
+                    <table class="table border">
+                        <tr class="table-secondary">
+                            <th>No.</th>
+                            <th>
+                                <label>Stage</label>
+                            </th>
+                            <th>
+                                <label>Starting Date</label>
+                            </th>
+                            <th>
+                                <label>Due Date</label>
+                            </th>
+                            <th>
+                                <label>Weight</label>
+                            </th>
+                            <th>
+                                <label>Status</label>
+                            </th>
+                            <th>
+                                <label>Action</label>
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.ProjectTasks)
+                        {
+                            <tr>
+                                <td>
+                                    @k
+                                    @{
+                                        k++;
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Detail" asp-controller="Task" asp-route-id="@item.Id">@item.Name</a>
+                                </td>
+                                <td>
+                                    @item.StartDate
+                                </td>
+                                <td>
+                                    @item.EndDate
+                                </td>
+                                <td>
+                                    @item.Weight
+                                </td>
+                                <td>
+                                    @item.Status
+                                </td>
+                                <td>
+
+                                    <form asp-action="Delete" asp-controller="Task" asp-route-id="@item.Id" method="POST">
+                                        <a asp-action="Edit" asp-controller="Task" asp-route-id="@item.Id"><i class="fa fa-edit"
+                                        style="font-size:24px"></i></a>
+                                        <label class="text-danger"><i class="fa fa-trash-o" style="font-size:24px"></i><button
+                                        type="submit" class="no-btn"
+                                        onclick="return confirm('Are you sure you want to delete?')"></button></label>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </table>
+                }
+                else
+                {
+                    <p>No task found.</p>
+                }
+            </div>
+        </div>
+        <div id="team" class="tab-pane fade in">
+            <div class="col-12 border p-3 mt-3">
+                <div class="col-12 row">
+                    <h1 class="text-info flex-grow-1">Project Teams</h1>
+                    <div>
+                        <a asp-action="Create" asp-controller="Team" asp-route-pid="@Model.PId"
+                            class="btn btn-info">Create
+                            Team</a>
+                    </div>
+                </div>
+                @if (Model.ProjectTeams.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>No.</th>
+                            <th>
+                                <label>Team Name</label>
+                            </th>
+                            <th>
+                                <label>Action</label>
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.ProjectTeams)
+                        {
+                            <tr>
+                                <td>
+                                    @j
+                                    @{
+                                        j++;
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Detail" asp-controller="Team" asp-route-id="@item.Id">@item.TeamName</a>
+                                </td>
+                                <td>
+                                    <form asp-action="Delete" asp-controller="Team" asp-route-id="@item.Id" method="POST">
+                                        <a asp-action="Edit" asp-controller="Team" asp-route-id="@item.Id"><i class="fa fa-edit"
+                                        style="font-size:24px"></i></a>
+                                        <a asp-action="AddMember" asp-controller="Team" asp-route-id="@item.Id"><i
+                                        class="fa fa-user-plus" style="font-size:24px;"></i></a>
+                                        <label class="text-danger"><i class="fa fa-trash-o" style="font-size:24px"></i><button
+                                        type="submit" class="no-btn"
+                                        onclick="return confirm('Are you sure you want to delete?')"></button></label>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>No team found.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

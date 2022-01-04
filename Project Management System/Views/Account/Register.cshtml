@@ -1,0 +1,79 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Add User";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class="container">
+    <h1 class="text-info">Add new user</h1>
+    <div class="col-sm-12">
+        @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <p class="text-success">@ViewBag.message</p>
+        }
+    </div>
+    <form asp-action="Register" asp-controller="Account" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="registerdiv">
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.FirstName" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.FirstName">
+                    <span class='text-danger' asp-validation-for="@Model.FirstName"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.LastName" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.LastName">
+                    <span class='text-danger' asp-validation-for="@Model.LastName"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Email" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="email" class='form-control' asp-for="@Model.Email">
+                    <span class='text-danger' asp-validation-for="@Model.Email"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.PhoneNumber" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.PhoneNumber">
+                    <span class='text-danger' asp-validation-for="@Model.PhoneNumber"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Password" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="password" class='form-control' asp-for="@Model.Password">
+                    <span class='text-danger' asp-validation-for="@Model.Password"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.ConfirmPassword" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="password" class='form-control' asp-for="@Model.ConfirmPassword">
+                    <span class='text-danger' asp-validation-for="@Model.ConfirmPassword"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12 btn-submit">
+                    <button type="submit" class="btn btn-success">Register</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

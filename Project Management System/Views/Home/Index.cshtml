@@ -1,0 +1,108 @@
+﻿@model LogInViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ET | Log in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css" />
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="~/css/custometcss.css" rel="stylesheet" />
+    <style type="text/css">
+        .loginlogo {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#">Login</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+
+                <img id="skyLightHotelLogo" class="image img-fluid img-responsive" style="max-width: 100%;height:200px;"
+                    src="~/images/Ethiopian_Airlines-Logo.wine.png" />
+
+                <form asp-area="" asp-controller="Home" asp-action="Index" id="btnLoginForm" name="btnLoginForm"
+                    method="post" class="form-horizontal" role="form" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group-sm">
+                        <div class="input-group mb-3">
+                            <input asp-for="@Model.Email" type="email" class="form-control" placeholder="Email">
+                            <div class="input-group-append">
+                                <span class="fa fa-envelope input-group-text text-primary"></span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <span class="fa fa-lock input-group-text text-primary"></span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+
+
+                    <div class="input-group mb-3">
+                        <input type='checkbox' class='form-check-input' asp-for="@Model.RememberMe">
+                        <label class='form-check-label' asp-for="@Model.RememberMe"></label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <!-- /.col -->
+                        <button type="submit" id="LoginSubmit" class="btn btn-primary btn-block btn-flat">Sign
+                            In</button>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.login-box -->
+        <!-- jQuery -->
+        <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="~/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+        <!-- FastClick -->
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' // optional
+                });
+
+                $('body').on('click', "#LoginSubmit", function (e) {
+
+                    e.preventDefault();
+
+                    $('#btnLoginForm').attr('action', "/Home/Index").submit();
+                });
+            });
+        </script>
+</body>
+
+</html>

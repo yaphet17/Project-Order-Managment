@@ -1,0 +1,53 @@
+@model ApplicationRole
+@{
+    ViewData["Title"] = "Create Role";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class="container">
+    <h1 class="text-info">Create Role</h1>
+    <div class="col-sm-12">
+        @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <p class="text-success">@ViewBag.message</p>
+        }
+        @if (TempData.ContainsKey("rMessage"))
+        {
+            <p class="text-success">@TempData["rMessage"]</p>
+        }
+    </div>
+    @if (TempData.ContainsKey("errorRMessage"))
+    {
+        <div class="col-sm-12 text-danger">
+            <p class="text-success">@TempData["rMessage"]</p>
+        </div>
+    }
+
+    <form asp-action="Create" asp-controller="Role" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="registerdiv">
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Name" class="col-lg-3 control-label"></label>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.Name">
+                    <span class='text-danger' asp-validation-for="@Model.Name"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Description" class="col-lg-3 control-label"></label>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.Description">
+                    <span class='text-danger' asp-validation-for="@Model.Description"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 btn-submit">
+                    <button type="submit" class="btn btn-success">Create</button>
+                    <a asp-action="Index" asp-controller="Role" class="btn btn-primary text-white">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

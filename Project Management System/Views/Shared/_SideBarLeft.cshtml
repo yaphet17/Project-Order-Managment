@@ -1,0 +1,121 @@
+﻿<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/images/logo.png" class="img-circle elevation-2" alt="ET Logo">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">Project Management System</a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column menu-open" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item">
+                </li>
+                <li class="nav-item has-treeview">
+                    <a asp-action="Index" asp-controller="Account" class="nav-link active">
+                        <p>
+                            Project
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="project" class="nav-link">
+                                <i class="nav-icon fa fa-list"></i>
+                                <p>Project List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Create" asp-controller="project" class="nav-link">
+                                <i class="fa fa-user-plus nav-icon"></i>
+                                <p>Create Project</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a asp-action="Index" asp-controller="Account" class="nav-link active">
+                        <p>
+                            Account Management
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="UsersList" asp-controller="Account" class="nav-link">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>User List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Register" asp-controller="Account" class="nav-link">
+                                <i class="fa fa-user-plus nav-icon"></i>
+                                <p>Register User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="AccessLog" asp-controller="Account" class="nav-link">
+                                <i class="fa fa-filter nav-icon"></i>
+                                <p>AccessLog</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <p>
+                            Master Data
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="index" asp-controller="Role" class="nav-link">
+                                <i class="fa fa-info nav-icon"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="index" asp-controller="Privilege" class="nav-link">
+                                <i class="fa fa-edit nav-icon"></i>
+                                <p>Privileges</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <p>
+                            Profile
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="Profile" asp-controller="Account" class="nav-link">
+                                <i class="fa fa-info nav-icon"></i>
+                                <p>Profile Info</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="EditProfile" asp-controller="Account" class="nav-link">
+                                <i class="fa fa-edit nav-icon"></i>
+                                <p>Edit Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="ChangePassword" asp-controller="Account" class="nav-link">
+                                <i class="fa fa-key nav-icon"></i>
+                                <p>Change Password</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

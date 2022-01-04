@@ -1,0 +1,66 @@
+@model Project
+@{
+    ViewData["Title"] = "Edit Project Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class='container border' style='padding:30px;'>
+    <div class="col-12">
+        <h1 class="text-info flex-grow-1">Edit project detail</h1>
+    </div>
+    <form asp-action="Edit" asp-controller="Project" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.ProjectName" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.ProjectName" class='form-control'>
+                <span asp-validation-for="@Model.ProjectName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.Description" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.Description" class='form-control'>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.Priority" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.Priority" class='form-control'>
+                <span asp-validation-for="@Model.Priority" class="text-danger"></span>
+            </div>
+        </div>
+        @if (Model.Status == "Intiated")
+        {
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.StartDate" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <input asp-for="@Model.StartDate" class='form-control'>
+                    <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="@Model.StartDate">
+
+        }
+        <div class='form-group form-submit row'>
+            <div class='col-2.5 btn-submit'>
+                <button type="submit" class='btn btn-success'>Update</button>
+            </div>
+            <div class='col-3'>
+                <a asp-action='Detail' asp-controller="Project" asp-route-pid="@Model.PId" class='btn btn-success'>Back
+                    to Detail</a>
+            </div>
+        </div>
+    </form>
+</div>

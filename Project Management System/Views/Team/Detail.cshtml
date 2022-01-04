@@ -1,0 +1,126 @@
+@model TeamDetailViewModel
+@{
+    ViewData["Title"] = "Team Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+    int i = 1;
+}
+<div class='border container' style='padding:30px;'>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#detail">Detail</a></li>
+        <li><a data-toggle="tab" href="#member">Members</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="detail" class="tab-pane fade in active">
+            <div class="col-12 row">
+                <h1 class="text-info flex-grow-1">Team detail</h1>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.TeamName" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <label>@Model.TeamName</label>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2'>
+                    <label asp-for="@Model.ProjectName" class="font-weight-bold"></label>
+                </div>
+                <div class='col-6'>
+                    <a asp-action="Detail" asp-controller="Project" asp-route-pid="@Model.PId">@Model.ProjectName</a>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2.5'>
+                    <a asp-action="Edit" asp-controller="Team" asp-route-id="@Model.TmId" class='btn btn-success'>Edit
+                        team detail</a>
+                </div>
+            </div>
+        </div>
+        <div id="member" class="tab-pane fade in">
+            <div class="col-12 border p-3 mt-3 row">
+                <h2 class="text-info flex-grow-1">Team members</h2>
+                <div>
+                    <a asp-action="AddMember" asp-controller="Team" asp-route-id="@Model.TmId" class="btn btn-info">Add
+                        team
+                        member</a>
+                </div>
+                <div class="col-sm-12">
+                    @if (TempData.ContainsKey("tmMessage"))
+                    {
+                        <p class="text-success">@TempData["tmMessage"]</p>
+                    }
+                    else if (TempData.ContainsKey("errorTmMessage"))
+                    {
+                        <p class="text-danger">@TempData["errorTmMessage"]</p>
+                    }
+                </div>
+                @if (Model.TeamMembersInfo.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                No.
+                            </th>
+                            <th>
+                                <label>Full Name</label>
+                            </th>
+                            <th>
+                                <label>Role</label>
+                            </th>
+                            <th>
+                                <label>Action</label>
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.TeamMembersInfo)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                    @{
+                                        i++;
+                                    }
+                                </td>
+                                <td>
+                                    @item.FirstName @item.LastName
+                                </td>
+                                <td>
+                                    @item.TeamRole
+                                </td>
+                                <td>
+
+                                    <form asp-action="RemoveMember" asp-controller="Team" asp-route-tmid="@Model.TmId"
+                                asp-route-uid="@item.UId" asp-route-pid="@Model.PId" method="POST">
+                                        <a asp-action="ChangeMemberRole" asp-controller="Team" asp-route-id="@Model.TmId"
+                                    asp-route-uid="@item.UId"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                                        <label class="text-danger"><i class="fa fa-remove" style="font-size:24px"></i><button
+                                        type="submit" class="no-btn"
+                                        onclick="return confirm('Are you sure you want to delete?')"></button></label>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>No member found.</p>
+                }
+            </div>
+            <div class='form-group row'>
+                <div class='col-2.5'>
+                    <a asp-action="Detail" asp-controller="Project" asp-route-pid="@Model.PId"
+                        class='btn btn-success'>Back
+                        To Project</a>
+                </div>
+                <div class='col-3'>
+                    <a asp-action="Index" asp-controller="Project" class='btn btn-success'>Back
+                        to
+                        List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+@model EditTaskViewModel
+@{
+    ViewData["Title"] = "Edit Task Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class='border container' style='padding:30px;'>
+    <div class="col-12 row">
+        <h1 class="text-info flex-grow-1">Edit task detail</h1>
+    </div>
+    <form asp-action="Edit" asp-controller="Task" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.Id">
+        <div class="col-sm-12">
+            @if (!string.IsNullOrEmpty(ViewBag.message))
+            {
+                <p class="text-danger">@ViewBag.message</p>
+            }
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.TaskName" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.TaskName" class='form-control'>
+                <span asp-validation-for="@Model.TaskName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.Description" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.Description" class='form-control'>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.StartDate" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input type="date" asp-for="@Model.StartDate" class='form-control'>
+                <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.EndDate" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.EndDate" class='form-control'>
+                <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.Weight" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input asp-for="@Model.Weight" class='form-control'>
+                <span asp-validation-for="@Model.Weight" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group form-submit row'>
+            <div class='col-2.5 btn-submit'>
+                <button type="submit" class='btn btn-success'>Update</button>
+            </div>
+            <div class='col-3'>
+                <a asp-action="Detail" asp-controller="Task" asp-route-id="@Model.Id" class='btn btn-success'>Back to
+                    Detail</a>
+            </div>
+        </div>
+
+    </form>
+</div>

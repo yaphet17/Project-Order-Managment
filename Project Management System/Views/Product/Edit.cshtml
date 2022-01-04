@@ -1,0 +1,124 @@
+@model ProjectProduct
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class="container" style='padding:30px;'>
+    <h1 class="text-info">Edit product</h1>
+    <div class="col-sm-12 text-danger">
+        @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <p class="text-success">@ViewBag.message</p>
+        }
+    </div>
+    <form asp-action="Edit" asp-controller="Product" method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="@Model.Id">
+        <div class="registerdiv">
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.ProductName" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input class='form-control' asp-for="@Model.ProductName">
+                    <span class='text-danger' asp-validation-for="@Model.ProductName"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.PrescPlan" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.PrescPlan">
+                    <span class='text-danger' asp-validation-for="@Model.PrescPlan"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.PrescActual" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.PrescActual">
+                    <span class='text-danger' asp-validation-for="@Model.PrescActual"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.DraftRPlan" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.DraftRPlan">
+                    <span class='text-danger' asp-validation-for="@Model.DraftRPlan"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.DraftAPlan" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.DraftAPlan">
+                    <span class='text-danger' asp-validation-for="@Model.DraftAPlan"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Fqccp" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.Fqccp">
+                    <span class='text-danger' asp-validation-for="@Model.Fqccp"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.Fqcca" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.Fqcca">
+                    <span class='text-danger' asp-validation-for="@Model.Fqcca"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.ApprovedPlan" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.ApprovedPlan">
+                    <span class='text-danger' asp-validation-for="@Model.ApprovedPlan"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.ApprovedActual" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.ApprovedActual">
+                    <span class='text-danger' asp-validation-for="@Model.ApprovedActual"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.HandleOPlan" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.HandleOPlan">
+                    <span class='text-danger' asp-validation-for="@Model.HandleOPlan"></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <label asp-for="@Model.HandleAPlan" class="col-lg-3 control-label"></label>
+                <br>
+                <div class="col-lg-9">
+                    <input type="date" class='form-control' asp-for="@Model.HandleAPlan">
+                    <span class='text-danger' asp-validation-for="@Model.HandleAPlan"></span>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-2.5'>
+                    <button class="btn btn-success">Update</button>
+                </div>
+                <div class='col-3'>
+                    <a asp-action="Detail" asp-controller="Project" asp-route-pid="@Model.PId"
+                        class='btn btn-success'>Back
+                        to
+                        Project</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,38 @@
+@model DelayViewModel
+@{
+    ViewData["Title"] = "Delay Project";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class='border container' style='padding:30px;'>
+    <div class="col-sm-12">
+        @if (!string.IsNullOrEmpty(ViewBag.message))
+        {
+            <p class="text-danger">@ViewBag.message</p>
+        }
+    </div>
+    <form asp-action="Delay" asp-controller="Project" method="POST">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.Id">
+        <div class="col-12 row">
+            <h1 class="text-info flex-grow-1">Delay project</h1>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.EndDate" class="font-weight-bold"></label>
+            </div>
+            <div class='col-6'>
+                <input type="date" asp-for="@Model.EndDate" class="form-control">
+                <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group form-submit row'>
+            <div class='col-2.5 btn-submit'>
+                <button type="submit" class='btn btn-success'>Update</button>
+            </div>
+            <div class='col-3'>
+                <a asp-action='Detail' asp-controller="Project" asp-route-pid="@Model.Id"
+                    class='btn btn-success'>Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+@model ChangeProjectStatusViewModel
+@{
+    ViewData["Title"] = "Change Project Status";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<div class='border container' style='padding:30px;'>
+    <form asp-action="ChangeStatus" asp-controller="Project" method="POST">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.PId">
+        <div class="col-12 row">
+            <h1 class="text-info flex-grow-1">Change project status</h1>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.ProjectName" class="font-weight-bold"></label>
+            </div>
+            <div class="col-6">
+                <h4>@Model.ProjectName</h4>
+                <span asp-validation-for="@Model.ProjectName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-2'>
+                <label asp-for="@Model.Status" class="font-weight-bold"></label>
+            </div>
+            <div class="col-6">
+                @Html.DropDownListFor(e => e.Status, new SelectList(ProjectStatusList.projectStatus,"Name","Value")
+                , new { @class = "form-control form-control-lg" })
+                <span asp-validation-for="@Model.Status" class="text-danger"></span>
+            </div>
+        </div>
+        <div class='form-group form-submit row'>
+            <div class='col-2.5 btn-submit'>
+                <button type="submit" class='btn btn-success'>Update</button>
+            </div>
+            <div class='col-3'>
+                <a asp-action='Detail' asp-controller="Project" asp-route-pid="@Model.PId"
+                    class='btn btn-success'>Done</a>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,131 @@
+@model TaskViewModel
+@{
+    ViewData["Title"] = "Task Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class='border container' style='padding:30px;'>
+    <div class="col-sm-12">
+        @if (TempData.ContainsKey("tkMessage"))
+        {
+            <p class="text-success">@TempData["tkMessage"]</p>
+        }
+        else if (TempData.ContainsKey("errorTkMessage"))
+        {
+            <p class="text-danger">@TempData["errorTkMessage"]</p>
+        }
+    </div>
+    <div class="col-12 row">
+        <h1 class="text-info flex-grow-1">Task detail</h1>
+        <div>
+            <a asp-action="ChangeStatus" asp-controller="Project" asp-route-id="@Model.Id" class="btn btn-info">Change
+                Status</a>
+            <a asp-action="Delay" asp-controller="Project" asp-route-id="@Model.Id" class="btn btn-info">Delay
+                Task</a>
+            <a asp-action="Create" asp-controller="Project" asp-route-pid="@Model.PId" class="btn btn-info">Create
+                Task</a>
+            <a asp-action="AssignOwner" asp-controller="Project" asp-route-id="@Model.Id" class="btn btn-info">Assign
+                Task Owner
+            </a>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.TaskName" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'>@Model.TaskName</h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.ProjectName" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class="form-control"><a asp-action="Detail" asp-controller="Project"
+                    asp-route-pid="@Model.PId">@Model.ProjectName</a>
+            </h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.TaskOwner" class="font-weight-bold"></label>
+        </div>
+        @if (Model.TaskOwner == "")
+        {
+            <div class='col-5'>
+                <h2 class='form-control'>@Model.TaskOwner</h2>
+            </div>
+            <div class="col-2">
+                <form asp-action="DeleteOwner" asp-controller="Project" asp-route-id="@Model.Id" method="POST">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete?')"
+                    class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class='col-6'>
+                <h2 class='form-control'>@Model.TaskOwner</h2>
+            </div>
+        }
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.Description" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'>@Model.Description</h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.StartDate" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'>@Model.StartDate</h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.EndDate" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'>@Model.EndDate</h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.Weight" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'>@Model.Weight</h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.Status" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'>@Model.Status</h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2'>
+            <label asp-for="@Model.AttachmentPath" class="font-weight-bold"></label>
+        </div>
+        <div class='col-6'>
+            <h2 class='form-control'><a href="@Model.AttachmentPath" download><i class="fa fa-paperclip"
+                        style="font-size:20px"></i> Attachment</a></h2>
+        </div>
+    </div>
+    <div class='form-group row'>
+        <div class='col-2.5'>
+            <a asp-action="Edit" asp-controller="Task" asp-route-id="@Model.Id" class='btn btn-success'>Edit
+                Task Detail</a>
+        </div>
+        <div class='col-3'>
+            <a asp-action="Detail" asp-controller="Project" asp-route-pid="@Model.PId" class='btn btn-success'>Back to
+                Project</a>
+        </div>
+    </div>
+</div>

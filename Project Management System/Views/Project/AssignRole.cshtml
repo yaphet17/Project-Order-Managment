@@ -1,0 +1,52 @@
+@model List<AssignRoleViewModel>
+@{
+    ViewData["Title"] = "Select Project Manager";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<div class="container row p-0 m-0" style='padding:30px;'>
+    <div class="col-9">
+        <h2 class="text-info">Select project manager</h2>
+    </div>
+
+    <div class="col-12 border p-3 mt-3">
+        <form asp-action="AssignProjectManager" asp-controller="Project" method="post">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th></th>
+                        <th>
+                            <label>Full Name</label>
+                        </th>
+                    </tr>
+
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        <tr>
+                            <input type="hidden" asp-for="@Model[i].PId">
+                            <input type="hidden" asp-for="@Model[i].UId">
+                            <input type="hidden" asp-for="@Model[i].RId">
+                            <td>
+                                <input type="checkbox" asp-for="@Model[i].CheckboxAnswer">
+                            </td>
+                            <td>
+                                @Model[i].FirstName @Model[i].LastName
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No user found.</p>
+            }
+            <div class='form-group row'>
+                <div class='col-2.5'>
+                    <button type="submit" class="btn btn-primary">Select</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
